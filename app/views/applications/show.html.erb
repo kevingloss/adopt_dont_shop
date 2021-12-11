@@ -5,7 +5,7 @@
 <p>Why would you make a good home for the pet(s): <%= @application.description %></p>
 <p>Pet Names:
   <% @application.pets.each do |pet| %>
-    <%= "#{pet.name} " %>
+    <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
   <% end %>
 </p>
 
