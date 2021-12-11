@@ -1,0 +1,14 @@
+<%= form_with url: path, method: method do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :street %>
+  <%= form.text_field :street %>
+  <%= form.label :city %>
+  <%= form.text_field :city %>
+  <%= form.label :state %>
+  <%= form.text_field :state %>
+  <%= form.label :zip %>
+  <%= form.text_field :zip %>
+
+  <%= form.submit button_text %>
+<% end %>
