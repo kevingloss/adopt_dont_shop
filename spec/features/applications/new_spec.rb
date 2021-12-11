@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'new application' do
   describe 'from the pet index page' do
 
-    it 'has a link to a new application page' do
+    it 'has a link to a new application page from pets index' do
       visit "/pets"
 
       click_link "Start an Application"
