@@ -7,7 +7,7 @@ class CreateApplications < ActiveRecord::Migration[5.2]
       t.string :state
       t.string :zip
       t.string :description
-      t.string :status, default: :in_progress
+      t.integer :status, default: 0
 
       t.timestamps
     end
