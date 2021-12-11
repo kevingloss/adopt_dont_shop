@@ -10,15 +10,17 @@ RSpec.describe 'application show page' do
         state: 'CO',
         zip: '80209',
         description: 'I love pets.',
+        status: :in_progress
         )
 
       @app_2 = Application.create!(
-        name: 'John Doe',
+        name: 'Jane Doe',
         street: '1234 14th St.',
         city: 'Golden',
         state: 'CO',
         zip: '80209',
         description: 'I will exercise with the pets.',
+        status: :in_progress
         )
 
       @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
@@ -38,13 +40,16 @@ RSpec.describe 'application show page' do
       expect(page).to have_content(@app.zip)
       expect(page).to have_content(@app.description)
       expect(page).to have_content(@app.status)
-      save_and_open_page
       expect(page).to_not have_content(@app_2.name)
       expect(page).to_not have_content(@app_2.description)
     end
 
-    xit 'contains the names of all the pets on the application as links to their show page' do
+    it 'contains the names of all the pets on the application as links to their show page' do
+      visit "/application/#{@app.id}"
 
+      click_link "Clawdia"
+
+      expect(current_path).to eq("/pets/#{@pet_2.id}")
     end
 
     xit 'has the applications status' do
