@@ -8,7 +8,7 @@ class ApplicationsController < ApplicationController
 
   def create
     application = Application.create(app_params)
-    # require 'pry'; binding.pry
+    
     redirect_to "/applications/#{application.id}"
   end
 
