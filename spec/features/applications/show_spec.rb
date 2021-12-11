@@ -12,14 +12,20 @@ RSpec.describe 'application show page' do
         description: 'I love pets.',
         )
 
-        @app_2 = Application.create!(
-          name: 'John Doe',
-          street: '1234 14th St.',
-          city: 'Golden',
-          state: 'CO',
-          zip: '80209',
-          description: 'I will exercise with the pets.',
-          )
+      @app_2 = Application.create!(
+        name: 'John Doe',
+        street: '1234 14th St.',
+        city: 'Golden',
+        state: 'CO',
+        zip: '80209',
+        description: 'I will exercise with the pets.',
+        )
+
+      @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+      @pet_1 = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
+      @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
+      @pet_3 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false)
+      @app.pets.push(@pet_1, @pet_2, @pet_3)
     end
 
     it 'contains the name, address, description of the applicant' do
@@ -32,6 +38,7 @@ RSpec.describe 'application show page' do
       expect(page).to have_content(@app.zip)
       expect(page).to have_content(@app.description)
       expect(page).to have_content(@app.status)
+      save_and_open_page
       expect(page).to_not have_content(@app_2.name)
       expect(page).to_not have_content(@app_2.description)
     end
