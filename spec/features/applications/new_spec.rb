@@ -2,16 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'new application' do
   describe 'from the pet index page' do
-    # before :each do
-    #   @app = Application.create!(
-    #     name: 'John Doe',
-    #     street: '1234 christmas way',
-    #     city: 'Denver',
-    #     state: 'CO',
-    #     zip: '80209',
-    #     description: 'I love pets.',
-    #     )
-    # end
 
     it 'has a link to a new application page' do
       visit "/pets"
