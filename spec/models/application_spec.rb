@@ -15,4 +15,16 @@ RSpec.describe Application, type: :model do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:status) }
   end
+
+  it 'will set the description by default' do
+    app = Application.create!(
+      name: 'John Doe',
+      street: '1234 christmas way',
+      city: 'Denver',
+      state: 'CO',
+      zip: '80209'
+      )
+
+      expect(app.description).to eq("Awaiting Input")
+  end
 end
