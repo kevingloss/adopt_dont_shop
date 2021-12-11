@@ -4,4 +4,10 @@ class Application < ApplicationRecord
 
   enum status: { in_progress: 0, pending: 1, accepted: 2, rejected: 3}
   validates_presence_of(:name, :street, :city, :state, :zip, :description, :status)
+  after_initialize :default_desc
+
+
+  def default_desc
+    self.description ||= "Awaiting Input"
+  end
 end

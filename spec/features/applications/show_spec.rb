@@ -8,8 +8,7 @@ RSpec.describe 'application show page' do
         street: '1234 christmas way',
         city: 'Denver',
         state: 'CO',
-        zip: '80209',
-        description: 'I love pets.',
+        zip: '80209'
         )
 
       @app_2 = Application.create!(
@@ -18,7 +17,6 @@ RSpec.describe 'application show page' do
         city: 'Golden',
         state: 'CO',
         zip: '80209',
-        description: 'I will exercise with the pets.',
         )
 
       @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
@@ -29,7 +27,7 @@ RSpec.describe 'application show page' do
     end
 
     it 'contains the name, address, description of the applicant, and application status' do
-      visit "/application/#{@app.id}"
+      visit "/applications/#{@app.id}"
 
       expect(page).to have_content(@app.name)
       expect(page).to have_content(@app.street)
@@ -43,7 +41,7 @@ RSpec.describe 'application show page' do
     end
 
     it 'contains the names of all the pets on the application as links to their show page' do
-      visit "/application/#{@app.id}"
+      visit "/applications/#{@app.id}"
 
       click_link "Clawdia"
 
