@@ -8,8 +8,7 @@ RSpec.describe 'application show page' do
         street: '1234 christmas way',
         city: 'Denver',
         state: 'CO',
-        zip: '80209',
-        description: 'I love pets.',
+        zip: '80209'
         )
 
       @app_2 = Application.create!(
@@ -18,7 +17,6 @@ RSpec.describe 'application show page' do
         city: 'Golden',
         state: 'CO',
         zip: '80209',
-        description: 'I will exercise with the pets.',
         )
 
       @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
