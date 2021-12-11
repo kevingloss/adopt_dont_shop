@@ -29,7 +29,7 @@ RSpec.describe 'application show page' do
     end
 
     it 'contains the name, address, description of the applicant, and application status' do
-      visit "/application/#{@app.id}"
+      visit "/applications/#{@app.id}"
 
       expect(page).to have_content(@app.name)
       expect(page).to have_content(@app.street)
@@ -43,7 +43,7 @@ RSpec.describe 'application show page' do
     end
 
     it 'contains the names of all the pets on the application as links to their show page' do
-      visit "/application/#{@app.id}"
+      visit "/applications/#{@app.id}"
 
       click_link "Clawdia"
 
