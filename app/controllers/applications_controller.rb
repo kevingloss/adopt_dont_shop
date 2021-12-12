@@ -1,6 +1,11 @@
 class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
+    if params[:pet_name] && @application.status == "in_progress"
+      @pets = Pet.where("name like ?", "%#{params[:pet_name]}%")
+    else
+      @pets = []
+    end
   end
 
   def new
