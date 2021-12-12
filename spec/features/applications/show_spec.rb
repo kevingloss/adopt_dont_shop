@@ -8,7 +8,8 @@ RSpec.describe 'application show page' do
         street: '1234 christmas way',
         city: 'Denver',
         state: 'CO',
-        zip: '80209'
+        zip: '80209',
+        description: 'Great with animals.'
         )
 
       @app_2 = Application.create!(
@@ -52,7 +53,7 @@ RSpec.describe 'application show page' do
     it 'has a search for pets by name that shows pets whose name matches the search' do
       visit "/applications/#{@app_2.id}"
 
-      fill_in(:search, with: 'Mr.')
+      fill_in(:pet_name, with: 'Mr.')
       click_button "Search"
 
       expect(current_path).to eq("/applications/#{@app_2.id}")
