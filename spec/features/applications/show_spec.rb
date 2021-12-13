@@ -63,18 +63,6 @@ RSpec.describe 'application show page' do
       expect(page).to_not have_content(@pet_3.name)
     end
 
-    it 'can add pets to the application with a button' do
-      visit "/applications/#{@app_2.id}"
-      fill_in(:pet_name, with: 'Mr.')
-      click_button "Search"
 
-      within("#pet-#{@pet_4.id}") do
-        click_button "Adopt this Pet"
-      end
-
-      expect(current_path).to eq("/applications/#{@app_2.id}")
-      expect(page).to have_content(@pet_4.name)
-      expect(page).to_not have_content(@pet_1.name)
-    end
   end
 end
