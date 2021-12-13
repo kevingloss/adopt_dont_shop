@@ -1,8 +1,8 @@
 class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
-    if params[:pet_name] && @application.status == "in_progress"
-      @pets = Pet.where("name like ?", "%#{params[:pet_name]}%")
+    if params[:add_pet] && @application.status == "in_progress"
+      @pets = Pet.search(params[:add_pet])
     else
       @pets = []
     end
@@ -19,6 +19,14 @@ class ApplicationsController < ApplicationController
       flash[:alert] = "Please fill in all fields."
       redirect_to "/applications/new"
     end
+  end
+
+  def update
+    application = Application.find(params[:id])
+    application.update(app_params)
+    application.pending!
+
+    redirect_to "/applications/#{application.id}"
   end
 
   private
