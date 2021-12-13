@@ -54,7 +54,7 @@ RSpec.describe 'application show page' do
       visit "/applications/#{@app_2.id}"
 
       fill_in(:pet_name, with: 'Mr. Spot')
-      click_button "Search"
+      click_button "Search for pets to add"
 
       expect(current_path).to eq("/applications/#{@app_2.id}")
       expect(page).to_not have_content(@pet_1.name)
@@ -74,6 +74,32 @@ RSpec.describe 'application show page' do
       expect(page).to have_content(@pet_4.name)
       expect(page).to_not have_content(@pet_2.name)
       expect(page).to_not have_content(@pet_3.name)
+    end
+
+    describe 'after pets are added to the application' do
+      it 'has a section to enter a description and submit the application' do
+        visit "/applications/#{@app.id}"
+
+        expect(page).to have_content("Enter description for why you would make a good home for the pet(s):")
+
+        fill_in(:description, with: "I really really like pets.")
+        click_button "Submit Application"
+
+        expect(current_path).to eq("/application/#{@app.id}")
+        expect(page).to have_content("pending")
+        expect(page).to have_content("I really really like pets.")
+      end
+
+      xit 'hides the add pets search after the application is pending' do
+        visit "/application/#{@app.id}"
+
+        expect(page).to have_content("Enter description for why you would make a good home for the pet(s)")
+
+        fill_in(:description, with: "I really really like pets.")
+        click_button "Submit Application"
+
+        expect(page).to_not have_button("Search for pets to add")
+      end
     end
   end
 end
