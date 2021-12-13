@@ -18,6 +18,11 @@
 </p>
 <p>
   <% @pets.each do |pet| %>
-    <p><%= pet.name %></p>
+    <section id="pet-<%= pet.id %>">
+      <p>
+        <%= pet.name %>
+        <%= button_to "Adopt this Pet", "/applications/#{@application.id}/pets?pet_id=#{pet.id}", method: :post %>
+      </p>
+    </section>
   <% end %>
 </p>
