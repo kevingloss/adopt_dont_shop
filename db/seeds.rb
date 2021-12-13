@@ -11,24 +11,24 @@
 # Shelter.destroy_all
 # Pet.destroy_all
 
-@app = Application.create!(
+@app = Application.where(
   name: 'John Doe',
   street: '1234 christmas way',
   city: 'Denver',
   state: 'CO',
   zip: '80209'
-  )
+  ).first_or_create
 
-@app_2 = Application.create!(
+@app_2 = Application.where(
   name: 'Jane Doe',
   street: '1234 14th St.',
   city: 'Golden',
   state: 'CO',
   zip: '80209',
-  )
+).first_or_create
 
-@shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
-@pet_1 = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
-@pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
-@pet_3 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false)
-@app.pets.push(@pet_1, @pet_2, @pet_3)
+@shelter_1 = Shelter.where(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9).first_or_create
+@pet_1 = @shelter_1.pets.where(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true).first_or_create
+@pet_2 = @shelter_1.pets.where(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true).first_or_create
+@pet_3 = @shelter_1.pets.where(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false).first_or_create
+@app.pets.push(@pet_1, @pet_2)

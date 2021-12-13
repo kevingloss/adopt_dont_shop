@@ -25,7 +25,7 @@ RSpec.describe 'application show page' do
       @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
       @pet_3 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false)
       @pet_4 = @shelter_1.pets.create(name: 'Mr. Spot', breed: 'ragdoll', age: 3, adoptable: true)
-      @app.pets.push(@pet_1, @pet_2, @pet_3)
+      @app.pets.push(@pet_1, @pet_2)
     end
 
     it 'contains the name, address, description of the applicant, and application status' do
@@ -53,7 +53,20 @@ RSpec.describe 'application show page' do
     it 'has a search for pets by name that shows pets whose name matches the search' do
       visit "/applications/#{@app_2.id}"
 
-      fill_in(:pet_name, with: 'Mr.')
+      fill_in(:pet_name, with: 'Mr. Spot')
+      click_button "Search"
+
+      expect(current_path).to eq("/applications/#{@app_2.id}")
+      expect(page).to_not have_content(@pet_1.name)
+      expect(page).to have_content(@pet_4.name)
+      expect(page).to_not have_content(@pet_2.name)
+      expect(page).to_not have_content(@pet_3.name)
+    end
+
+    it 'searches patials and case insensitive' do
+      visit "/applications/#{@app_2.id}"
+
+      fill_in(:pet_name, with: 'mr.')
       click_button "Search"
 
       expect(current_path).to eq("/applications/#{@app_2.id}")
@@ -62,7 +75,5 @@ RSpec.describe 'application show page' do
       expect(page).to_not have_content(@pet_2.name)
       expect(page).to_not have_content(@pet_3.name)
     end
-
-
   end
 end
