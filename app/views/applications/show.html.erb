@@ -2,42 +2,52 @@
 
 <p>Name: <%= @application.name %></p>
 <p>Address: <%= "#{@application.street}, " "#{@application.city}, " "#{@application.state} " "#{@application.zip}" %></p>
-<p>Why would you make a good home for the pet(s): <%= @application.description %></p>
+
 <p>Pet Names:
   <% @application.pets.each do |pet| %>
     <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
   <% end %>
 </p>
+<hr>
 
-<p>Application Status: <%= @application.status %></p>
-<p>
-  <%= render partial: 'form', locals: {
-    path: "/applications/#{@application.id}?search=input",
-    method: :get,
-    button_text: 'Search for pets to add'
-  } %>
-</p>
-<p>
-  <% if @application.status == 'in_progress' %>
-    <% @pets.each do |pet| %>
-      <section id="pet-<%= pet.id %>">
-        <p>
-          <%= pet.name %>
-          <%= button_to "Adopt this Pet", "/applications/#{@application.id}/pets?pet_id=#{pet.id}", method: :post %>
-        </p>
-      </section>
-    <% end %>
+<h3>Application Status:</h3>
+<% if @application.status == 'in_progress' %>
+  <p>Status: <%= @application.status %></p>
+  <% @pets.each do |pet| %>
+    <section id="pet-<%= pet.id %>">
+      <p>
+        <%= pet.name %>
+        <%= button_to "Adopt this Pet", "/applications/#{@application.id}/pets?pet_id=#{pet.id}", method: :post %>
+      </p>
+    </section>
   <% end %>
-</p>
-<p>
-  <% if @application.status == 'pending' && @applications.pets.empty? == false %>
-    <p>Enter description for why you would make a good home for the pet(s):</p>
-    <p>
-      <%= render partial: 'form', locals: {
-        path: "/applications/#{@application.id}",
-        method: :patch,
-        button_text: 'Submit Application'
-      } %>
-    </p>
-  <% end %>
-</p>
+  <p>
+    <%= render partial: 'form', locals: {
+      path: "/applications/#{@application.id}?search=add_pet",
+      label: 'Add Pet: ',
+      text: :add_pet,
+      method: :get,
+      button_text: 'Search for pets to add'
+    } %>
+    <hr>
+  </p>
+<% else @application.status != 'in_progress'%>
+  <p>Status: <%= @application.status %></p>
+<% end %>
+
+
+<h3>Good Home Description:</h3>
+<% if @application.status == 'in_progress' && @application.pets.empty? == false %>
+  <p>Enter description for why you would make a good home for the pet(s):</p>
+  <p>
+    <%= render partial: 'form', locals: {
+      path: "/applications/#{@application.id}",
+      label: 'Description: ',
+      text: :description,
+      method: :patch,
+      button_text: 'Submit Application'
+    } %>
+  </p>
+<% elsif @application.status != 'in_progress' %>
+  <p><%= @application.description %></p>
+<% end %>

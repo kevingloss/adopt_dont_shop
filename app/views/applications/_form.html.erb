@@ -1,7 +1,7 @@
 <%= form_with url: path, method: method do |form| %>
   <p>
-    <%= form.label :input %>
-    <%= form.text_field :input %>
+    <%= form.label label %>
+    <%= form.text_field text %>
   </p>
   <%= form.submit button_text %>
 <% end %>
