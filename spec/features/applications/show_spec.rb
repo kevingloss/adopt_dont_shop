@@ -53,7 +53,7 @@ RSpec.describe 'application show page' do
     it 'has a search for pets by name that shows pets whose name matches the search' do
       visit "/applications/#{@app_2.id}"
 
-      fill_in(:pet_name, with: 'Mr. Spot')
+      fill_in(:input, with: 'Mr. Spot')
       click_button "Search for pets to add"
 
       expect(current_path).to eq("/applications/#{@app_2.id}")
@@ -66,7 +66,7 @@ RSpec.describe 'application show page' do
     it 'searches patials and case insensitive' do
       visit "/applications/#{@app_2.id}"
 
-      fill_in(:pet_name, with: 'mr.')
+      fill_in(:input, with: 'mr.')
       click_button "Search"
 
       expect(current_path).to eq("/applications/#{@app_2.id}")
