@@ -48,6 +48,6 @@
       button_text: 'Submit Application'
     } %>
   </p>
-<% elsif @application.status != 'in_progress' %>
+<% else%>
   <p><%= @application.description %></p>
 <% end %>
