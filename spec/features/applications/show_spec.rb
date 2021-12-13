@@ -100,6 +100,15 @@ RSpec.describe 'application show page' do
         expect(page).to_not have_button("Search for pets to add")
         expect(page).to have_content("pending")
       end
+
+      describe 'when no pets are added to the application' do
+        it 'does not have an option to submit application' do
+          visit "/applications/#{@app_2.id}"
+
+          expect(page).to_not have_button("Submit Application")
+          expect(page).to have_button("Search for pets to add")
+        end
+      end
     end
   end
 end
