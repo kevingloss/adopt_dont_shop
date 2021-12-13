@@ -30,7 +30,7 @@ RSpec.describe 'create pets on application' do
   describe 'from the application show page' do
     it 'can add pets to the application with a button' do
       visit "/applications/#{@app_2.id}"
-      fill_in(:pet_name, with: 'Mr.')
+      fill_in(:add_pet, with: 'Mr.')
       click_button "Search"
 
       within("#pet-#{@pet_4.id}") do
