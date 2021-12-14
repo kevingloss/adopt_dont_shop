@@ -16,8 +16,17 @@ RSpec.describe 'admin application show page' do
       state: 'CO',
       zip: '80209',
       )
+    @app_2 = Application.create!(
+      name: 'Jane Doe',
+      street: '1234 christmas way',
+      city: 'Denver',
+      state: 'CO',
+      zip: '80209',
+      )
     @app.pets.push(@pet_1, @pet_3)
     @app.pending!
+    @app_2.pets.push(@pet_1)
+    @app_2.pending!
   end
 
   it 'shows all the pets that are on an application' do
@@ -75,6 +84,22 @@ RSpec.describe 'admin application show page' do
         expect(page).to_not have_button("Approve #{@pet_1.name}")
         expect(page).to_not have_button("Reject #{@pet_1.name}")
       end
+    end
+
+    it "doesn't change the status of pets on other applications" do
+      visit "/admin/applications/#{@app.id}"
+
+      within("#pet-#{@pet_1.id}") do
+        click_button("Reject #{@pet_1.name}")
+      end
+
+      visit "/admin/applications/#{@app_2.id}"
+
+      expect(page).to have_button("Approve #{@pet_1.name}")
+
+      click_button("Approve #{@pet_1.name}")
+
+      expect(page).to have_content("#{@pet_1.name} approved for adoption.")
     end
   end
 end
