@@ -28,7 +28,7 @@ RSpec.describe 'admin application show page' do
     expect(page).to_not have_content(@pet_2.name)
   end
 
-  xit 'has a button to approve each pet' do
+  it 'has a button to approve each pet' do
     visit "admin/applications/#{@app.id}"
 
     within("#pet-#{@pet_1.id}") do
@@ -40,7 +40,7 @@ RSpec.describe 'admin application show page' do
     end
   end
 
-  xit 'has a button to reject each pet' do
+  it 'has a button to reject each pet' do
     visit "admin/applications/#{@app.id}"
 
     within("#pet-#{@pet_1.id}") do
@@ -53,7 +53,7 @@ RSpec.describe 'admin application show page' do
   end
 
   describe 'when the approval/rejection button is clicked' do
-    xit 'takes you back to the show page and shows an approved status, and no buttons' do
+    it 'takes you back to the show page and shows an approved status, and no buttons' do
       visit "admin/applications/#{@app.id}"
 
       within("#pet-#{@pet_1.id}") do
@@ -65,7 +65,7 @@ RSpec.describe 'admin application show page' do
       end
     end
 
-    xit 'takes you back to the show page and shows a rejected status, and no buttons' do
+    it 'takes you back to the show page and shows a rejected status, and no buttons' do
       visit "admin/applications/#{@app.id}"
 
       within("#pet-#{@pet_1.id}") do
