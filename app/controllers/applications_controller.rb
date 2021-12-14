@@ -18,6 +18,8 @@ class ApplicationsController < ApplicationController
     else
       flash[:alert] = "Please fill in all fields."
       redirect_to "/applications/new"
+      # the render below seems to direct me to the applications/index for some reason, why?
+      # render :new
     end
   end
 
