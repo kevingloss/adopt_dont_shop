@@ -1,0 +1,17 @@
+<h1>Pets requested for adoption by: <%= @application.name %></h1>
+
+<% @application.application_pets.each do |app_pet| %>
+  <section id="pet-<%= app_pet.pet.id %>">
+    <p>
+      <%= app_pet.pet.name %>
+      <% if app_pet.pending? %>
+        <%= button_to "Approve #{app_pet.pet.name}", "/admin/applications/#{app_pet.id}?pet_status=approved", method: :patch %>
+        <%= button_to "Reject #{app_pet.pet.name}", "/admin/applications/#{app_pet.id}?pet_status=rejected", method: :patch %>
+      <% elsif app_pet.approved? %>
+        <%= "#{app_pet.pet.name} approved for adoption." %>
+      <% elsif app_pet.rejected? %>
+        <%= "#{app_pet.pet.name} rejected for adoption." %>
+      <% end %>
+    </p>
+  </section>
+<% end %>
