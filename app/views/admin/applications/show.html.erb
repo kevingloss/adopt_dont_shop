@@ -5,12 +5,12 @@
     <p>
       <%= app_pet.pet.name %>
       <% if app_pet.pending? %>
-        <%= button_to "Approve #{app_pet.pet.name}", "/admin/applications/#{app_pet.id}?pet_status=approved", method: :patch %>
-        <%= button_to "Reject #{app_pet.pet.name}", "/admin/applications/#{app_pet.id}?pet_status=rejected", method: :patch %>
+        <%= button_to "Approve #{app_pet.pet.name}", "/admin/application_pets/#{app_pet.id}?pet_status=approved", method: :patch %>
+        <%= button_to "Reject #{app_pet.pet.name}", "/admin/application_pets/#{app_pet.id}?pet_status=rejected", method: :patch %>
       <% elsif app_pet.approved? %>
-        <%= "#{app_pet.pet.name} approved for adoption." %>
+        <p><%= "#{app_pet.pet.name} approved for adoption." %></p>
       <% elsif app_pet.rejected? %>
-        <%= "#{app_pet.pet.name} rejected for adoption." %>
+        <p><%= "#{app_pet.pet.name} rejected for adoption." %></p>
       <% end %>
     </p>
   </section>
