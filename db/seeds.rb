@@ -27,8 +27,15 @@
   zip: '80209',
 ).first_or_create
 
+
 @shelter_1 = Shelter.where(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9).first_or_create
+@shelter_2 = Shelter.where(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5).first_or_create
+@shelter_3 = Shelter.where(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10).first_or_create
+
 @pet_1 = @shelter_1.pets.where(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true).first_or_create
 @pet_2 = @shelter_1.pets.where(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true).first_or_create
 @pet_3 = @shelter_1.pets.where(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false).first_or_create
+@pet_4 = @shelter_3.pets.where(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true).first_or_create
+
 @app.pets.push(@pet_1, @pet_2)
+@app_2.pets.push(@pet_4)
